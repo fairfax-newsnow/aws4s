@@ -20,7 +20,7 @@ addCompilerPlugin("org.spire-math"  %% "kind-projector" % "0.9.4")
 addCompilerPlugin("org.scalamacros" % "paradise"        % "2.1.0" cross CrossVersion.full)
 enablePlugins(TutPlugin)
 
-val http4sVersion     = "0.18.0"
+val http4sVersion     = "0.19.0-M1"
 val scalatestVersion  = "3.0.4"
 val circeVersion      = "0.9.1"
 val simulacrumVersion = "0.11.0"
@@ -32,7 +32,7 @@ libraryDependencies ++= Seq(
   "io.circe"      %% "circe-core"          % circeVersion,
   "com.github.mpilquist" %% "simulacrum" % simulacrumVersion,
   "org.scalatest" %% "scalatest"           % scalatestVersion % Test,
-  "org.http4s"    %% "http4s-blaze-client" % http4sVersion % Test,
+  "org.http4s"    %% "http4s-blaze-client" % http4sVersion % Test
 )
 
 publishTo := Some(

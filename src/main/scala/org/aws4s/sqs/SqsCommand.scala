@@ -19,6 +19,6 @@ private[sqs] abstract class SqsCommand[F[_]: Effect, R: EntityDecoder[F, ?]] ext
   override final val validator: Validator[String] = _ => None
   override final val requestGenerator: List[RenderedParam[String]] => F[Request[F]] = { params =>
     val body = params.map(p => (p.name, p.value)).foldLeft(UrlForm())((form, newPair) => form + newPair) + ("Action" -> action)
-    Request[F](Method.POST, q.uri, headers = Headers(Host(q.host))).withBody[UrlForm](body)
+    Effect[F].delay(Request[F](Method.POST, q.uri, headers = Headers(Host(q.host)), body = UrlForm.entityEncoder.toEntity(body).body))
   }
 }

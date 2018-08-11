@@ -25,7 +25,7 @@ private[aws4s] abstract class S3ObjectCommand[F[_]: Effect, R: EntityDecoder[F, 
     for {
       pStream <- payload
       pBytes <- pStream.compile.toVector
-      r <- Request[F](action, uri, headers = Headers(Host(host))).withBody(pBytes.toArray)
+      r <- Effect[F].delay(Request[F](action, uri, body = fs2.Stream.emits(pBytes), headers = Headers(Host(host))))
     } yield r
   }
 }
